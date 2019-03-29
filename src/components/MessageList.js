@@ -1,30 +1,17 @@
 import React from 'react';
-
-const DATA = [
-    {
-        senderId: 'mariusz',
-        text: 'hey'
-    },
-    {
-        senderId: 'cygas',
-        text: 'co się staneło?'
-    },
-    {
-        senderId: 'mariusz',
-        text: 'a tak tylko zagaduję'
-    }
-];
+import Message from './Message';
 
 export default class MessageList extends React.Component {
     render() {
         return (
             <div className='message-list'>
-                {DATA.map((message, index) => {
+                {this.props.messages.map((message, index) => {
                     return (
-                        <div key={index} className='message'>
-                            <div className='message-username'>{message.senderId}</div>
-                            <div className='message-text'>{message.text}</div>
-                        </div>
+                        <Message
+                            key={index}
+                            username={message.senderId}
+                            text={message.parts[0].payload.content}
+                        />
                     );
                 })}
             </div>
