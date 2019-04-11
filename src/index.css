@@ -1,18 +1,18 @@
-/*:root {
+:root {
     --main-color: #5ea3d0;
     --secondary-color: white;
     --main-text-color: #3e5869;
     --secondary-text-color: #b0c7d6;
     --send-message-form: #F5F5F5;
-}*/
+}
 
-:root {
+/*:root {
   --main-color: #fd9ab6;
   --secondary-color: #fff4e6;
   --main-text-color: #11d7d8;
   --secondary-text-color: pink;
   --send-message-form: white;
-}
+}*/
 
 html, body {
   height: 100%;
@@ -30,7 +30,7 @@ html, body {
 .app {
   display: grid;
   height: 100%;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 300px;
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr 60px;
   grid-template-areas:
           "m m m m m r"
@@ -69,7 +69,6 @@ html, body {
 .rooms-list ul {
   list-style-type: none;
   padding: 0;
-  overflow: scoll;
 }
 
 .rooms-list li {
