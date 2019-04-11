@@ -1,30 +1,39 @@
 import React from 'react';
-
-const DATA = [
-    {
-        senderId: 'mariusz',
-        text: 'hey'
-    },
-    {
-        senderId: 'cygas',
-        text: 'co się staneło?'
-    },
-    {
-        senderId: 'mariusz',
-        text: 'a tak tylko zagaduję'
-    }
-];
+import ReactDOM from 'react-dom';
+import Message from './Message';
 
 export default class MessageList extends React.Component {
+    componentWillUpdate() {
+        const node = ReactDOM.findDOMNode(this);
+        this.shouldScrollToBottom = node.scrollTop + node.clientHeight + 100 >= node.scrollHeight;
+    }
+
+    componentDidUpdate() {
+        if (this.shouldScrollToBottom) {
+            const node = ReactDOM.findDOMNode(this);
+            node.scrollTop = node.scrollHeight;
+        }
+    }
+
     render() {
+        if(!this.props.roomId) {
+            return (
+                <div className='message-list'>
+                    <div className='join-room'>
+                        &larr; Join a room!
+                    </div>
+                </div>
+            )
+        }
         return (
             <div className='message-list'>
-                {DATA.map((message, index) => {
+                {this.props.messages.map((message, index) => {
                     return (
-                        <div key={index} className='message'>
-                            <div className='message-username'>{message.senderId}</div>
-                            <div className='message-text'>{message.text}</div>
-                        </div>
+                        <Message
+                            key={index}
+                            username={message.senderId}
+                            text={message.parts[0].payload.content}
+                        />
                     );
                 })}
             </div>
