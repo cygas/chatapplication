@@ -68,6 +68,14 @@ class App extends Component {
         });
     };
 
+    createRoom = name => {
+        this.currentUser.createRoom({
+            name
+        })
+            .then(room => this.subscribeToRoom(room.id))
+            .catch(err => console.log('error with create room: ', err));
+    };
+
     render() {
         return (
             <div>
@@ -78,7 +86,7 @@ class App extends Component {
                 />
                 <MessageList messages={this.state.messages}/>
                 <SendMessageForm sendMessage={this.sendMessage}/>
-                <NewRoomForm/>
+                <NewRoomForm createRoom={this.createRoom}/>
             </div>
         );
     }
